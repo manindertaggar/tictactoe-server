@@ -1,13 +1,12 @@
 <?php
-require 'config.php';
 
 class Mover
 {
-	private $conn;
+    private $conn;
 
     public function __construct($conn)
-    {	
-    	$this->conn = $conn;
+    {
+        $this->conn = $conn;
     }
 
     public function makeMove($playerId, $payload)
@@ -17,25 +16,72 @@ class Mover
         $move   = $payload['move'];
         $gameId = $payload['gameId'];
 
-        $this->verifyAccess($playerId, $gameId, $moveId);
+        $this->verifyAccess($playerId, $gameId, $move);
 
     }
 
-    private function verifyAccess($playerId, $gameId, $moveId)
+    private function verifyAccess($playerId, $gameId, $move)
     {
-        $sql    = "SELECT player_id FROM $DB_TABLE WHERE id ='$game_id' ORDER BY i DESC LIMIT 1";
-        $result = $this->conn->query($sql);
-        $data   = $result->fetch_assoc();
+        $this->isGameInProgress($gameId);
+        $this->checkIfSameMoveHasBeenMade($gameId, $move);
+        $this->doesPlayerHaveHisTurn($playerId, $gameId);
+    }
 
-        if ($data != null && $data['playerId'] === $playerId) {
-            $output->show_error("its not your turn");
+    private function checkIfSameMoveHasBeenMade($gameId, $move)
+    {
+
+        $sql    = "SELECT * FROM moves WHERE gameId ='$gameId' and move = '$move'";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            $this->output->error("access verification failed. Database Error");
+        }
+
+        $data = $result->fetch_assoc();
+        if ($data != null) {
+            $this->output->error("invalid move, move has been already made." . $gameId);
         }
 
     }
 
+    private function doesPlayerHaveHisTurn($playerId, $gameId)
+    {
+        $sql    = "SELECT playerId FROM playerGame WHERE gameId ='$game_id' ORDER BY id DESC LIMIT 1";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            $this->output->error("access verification failed. Database Error");
+        }
+
+        $data = $result->fetch_assoc();
+        if ($data === null) {
+            $this->output->error("access verification failed, no game found with id " . $gameId);
+        }
+
+        if ($data['player_id'] === $player_id) {
+            $this->output->error("$playerId doesnot have its turn");
+        }
+    }
+
+    private function isGameInProgress($gameId)
+    {
+        $sql    = "SELECT status FROM games WHERE gameId ='$gameId'";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            $this->output->error("access verification failed. Database Error");
+        }
+
+        $data = $result->fetch_assoc();
+        if ($data === null) {
+            $this->output->error("access verification failed, no game found with id " . $gameId);
+        }
+
+        if ($data['status'] !== "inProgess") {
+            $this->output->error("access verification failed, game has been already completed");
+        }
+    }
+
     private function verifyMovePayload($payload)
     {
-        if ($payload === null) {
+        if ($payload === NULL) {
             $this->output->error("move payload is null");
             return false;
         }
