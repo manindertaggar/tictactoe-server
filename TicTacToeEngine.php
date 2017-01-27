@@ -6,7 +6,7 @@ require 'CredentialVerifier.php';
 require 'Output.php';
 require 'Mover.php';
 require 'Database.php';
-require 'GamePlanner.php'
+require 'GamePlanner.php';
 
 class TicTacToeEngine
 {
