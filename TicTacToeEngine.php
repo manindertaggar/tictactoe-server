@@ -8,6 +8,6 @@ class TicTacToeEngine
 
     public function onMessageReceived($message)
     {
-        file_put_contents("log.txt", $message);
+        var_dump(file_put_contents("log.txt", $message));
     }
 }
