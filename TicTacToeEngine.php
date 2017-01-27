@@ -45,8 +45,8 @@ class TicTacToeEngine
             case "requestGame":
                 $this->requestGame($playerId, $payload);
                 break;
-            case "updateProfile":
-                $this->updateProfile($playerId, $payload);
+            case "requestGameWithFriend":
+                $this->requestGameWithFriend($playerId, $payload);
                 break;
             default:
                 $this->output->error("undefined packet type");
@@ -57,22 +57,24 @@ class TicTacToeEngine
     private function makeMove($playerId, $payload)
     {
         $this->mover->makeMove($playerId, $payload);
-
+        $gameId = $payload['gameId'];
+        $this->gamePlanner->update($gameId);
     }
 
     private function endGame($playerId, $payload)
     {
-
+        $gameId = $payload['gameId'];
+        $this->gamePlanner->surrender($playerId, $gameId);
     }
 
     private function requestGame($playerId, $payload)
     {
-
+        $this->gamePlaner->requestGame($playerId);
     }
-
-    private function updateProfile($playerId, $payload)
+    private function requestGameWith($playerId, $payload)
     {
-
+        $otherPlayerId = $payload["otherPlayerId"];
+        $this->gamePlaner->requestGameWith($playerId, $otherPlayerId);
     }
 
     private function isPacketValid($packet)
@@ -99,16 +101,16 @@ class TicTacToeEngine
             return false;
         }
 
-        $playerId    = $player['playerId'];
-        $token       = $player['token'];
-        $isValidUser = $this->credentialVerifier->verify($playerId, $token);
+        $playerId = $player['playerId'];
+        $token    = $player['token'];
 
+        $isValidUser = $this->credentialVerifier->verify($playerId, $token);
         if (!$isValidUser) {
             $this->output->error("user details donot match");
         }
-
         return $isValidUser;
 
+        return true;
     }
 
 }

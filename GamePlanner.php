@@ -8,19 +8,24 @@ class GamePlanner
         $this->conn = $conn;
     }
 
-    public function startGame($playerId)
+    public function update($gameId)
     {
 
     }
 
-    public function startGameWith($player1Id, $player2Id)
+    public function requestGame($playerId)
+    {
+
+    }
+
+    public function requestGameWith($player1Id, $player2Id)
     {
 
     }
 
     public function surrender($playerId, $gameId)
     {
-
+        
     }
 
 }
