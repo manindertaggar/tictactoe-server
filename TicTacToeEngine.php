@@ -4,16 +4,22 @@ ini_set('display_errors', 1);
 
 require 'CredentialVerifier.php';
 require 'Output.php';
+require 'Mover.php';
+require 'Database.php';
 
 class TicTacToeEngine
 {
     private $credentialVerifier;
     private $output;
+    private $mover;
+    private $conn;
 
     public function __construct()
     {
-        $this->credentialVerifier = new CredentialVerifier();
         $this->output             = new Output();
+        $this->conn               = new Database()->getConnection();
+        $this->credentialVerifier = new CredentialVerifier($this->conn);
+        $this->mover              = new Mover($this->conn);
     }
 
     public function onpacketReceived($packet)
@@ -23,19 +29,21 @@ class TicTacToeEngine
             return;
         }
 
-        $type = $packet["type"];
+        $type     = $packet["type"];
+        $payload  = $packet["payload"];
+        $playerId = $packet["player"]["playerId"];
         switch ($type) {
             case "makeMove":
-                $this->makeMove($packet);
+                $this->makeMove($playerId, $payload);
                 break;
             case "endGame":
-                $this->endGame($packet);
+                $this->endGame($playerId, $payload);
                 break;
             case "requestGame":
-                $this->requestGame($packet);
+                $this->requestGame($playerId, $payload);
                 break;
             case "updateProfile":
-                $this->updateProfile($packet);
+                $this->updateProfile($playerId, $payload);
                 break;
             default:
                 $this->output->error("undefined packet type");
@@ -43,22 +51,22 @@ class TicTacToeEngine
         }
     }
 
-    private function makeMove($packet)
+    private function makeMove($playerId, $payload)
+    {
+        $this->mover->makeMove($playerId, $payload);
+    }
+
+    private function endGame($playerId, $payload)
     {
 
     }
 
-    private function endGame($packet)
+    private function requestGame($playerId, $payload)
     {
 
     }
 
-    private function requestGame($packet)
-    {
-
-    }
-
-    private function updateProfile($packet)
+    private function updateProfile($playerId, $payload)
     {
 
     }
@@ -75,13 +83,20 @@ class TicTacToeEngine
             return false;
         }
 
-        if (!(array_key_exists('playerId', $packet) && array_key_exists('token', $packet))) {
+        if (!array_key_exists('player', $packet)) {
+            $this->output->error("user not found in packet");
+            return false;
+        }
+
+        $player = $packet['player'];
+
+        if (!(array_key_exists('playerId', $player) && array_key_exists('token', $player))) {
             $this->output->error("user credentials not found in packet");
             return false;
         }
 
-        $playerId      = $packet['playerId'];
-        $token       = $packet['token'];
+        $playerId    = $player['playerId'];
+        $token       = $player['token'];
         $isValidUser = $this->credentialVerifier->verify($playerId, $token);
 
         if (!$isValidUser) {
