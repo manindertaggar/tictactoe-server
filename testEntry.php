@@ -1,6 +1,5 @@
 <?php
 require 'TicTacToeEngine.php';
-
-$message         = $_POST["message"];
+$message         = json_decode($_POST['message'], true);
 $ticTacToeEngine = new TicTacToeEngine();
-$ticTacToeEngine->onMessageReceived($message);
+$ticTacToeEngine->onPacketReceived($message);
