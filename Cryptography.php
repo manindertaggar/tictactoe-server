@@ -1,5 +1,5 @@
 <?php
-function get_hash_for($data){
+function getHashFor($data){
     $hash = password_hash($data, CRYPT_BLOWFISH);
     return $hash;
 }

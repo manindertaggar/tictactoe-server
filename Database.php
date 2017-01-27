@@ -6,7 +6,7 @@ class Database
     private $DB_USER = "root";
     private $DB_PASSWORD = "2eight1987";
     private $DB_NAME = "tictactoe";
-    private $conn = null;
+    private $conn ;
 
     public function __construct()
     {

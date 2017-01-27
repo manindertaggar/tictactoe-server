@@ -6,20 +6,23 @@ require 'CredentialVerifier.php';
 require 'Output.php';
 require 'Mover.php';
 require 'Database.php';
+require 'GamePlanner.php'
 
 class TicTacToeEngine
 {
-    private $credentialVerifier;
     private $output;
-    private $mover;
     private $conn;
+    private $credentialVerifier;
+    private $mover;
+    private $gamePlanner;
 
     public function __construct()
     {
         $this->output             = new Output();
-        $this->conn               = new Database()->getConnection();
+        $this->conn               = (new Database())->getConnection();
         $this->credentialVerifier = new CredentialVerifier($this->conn);
         $this->mover              = new Mover($this->conn);
+        $this->gamePlanner        = new GamePlanner($this->conn);
     }
 
     public function onpacketReceived($packet)
@@ -54,6 +57,7 @@ class TicTacToeEngine
     private function makeMove($playerId, $payload)
     {
         $this->mover->makeMove($playerId, $payload);
+
     }
 
     private function endGame($playerId, $payload)

@@ -18,6 +18,11 @@ class Mover
 
         $this->verifyAccess($playerId, $gameId, $move);
 
+        //everything is fine, lets make move now
+
+        $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
+        $result = $conn->query($sql);
+
     }
 
     private function verifyAccess($playerId, $gameId, $move)
@@ -81,7 +86,7 @@ class Mover
 
     private function verifyMovePayload($payload)
     {
-        if ($payload === NULL) {
+        if ($payload === null) {
             $this->output->error("move payload is null");
             return false;
         }
