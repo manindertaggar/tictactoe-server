@@ -27,12 +27,12 @@ class PlayerManager
         private double winPercentage;
         private String playerId;
          */
-        if (!array_key_exists('name', $postBody['data']) ||
-            !array_key_exists('age', $postBody['data']) ||
-            !array_key_exists('avatarUrl', $postBody['data']) ||
-            !array_key_exists('password', $postBody['data']) ||
-            !array_key_exists('emailId', $postBody['data'])) {
-            $output->error("invalid arguments");
+        if (!array_key_exists('name', $payload) ||
+            !array_key_exists('age', $payload) ||
+            !array_key_exists('avatarUrl', $payload) ||
+            !array_key_exists('password', $payload) ||
+            !array_key_exists('emailId', $payload)) {
+            $this->output->error("invalid arguments");
         }
 
         $emailId = $payload['emailId'];
@@ -90,7 +90,7 @@ class PlayerManager
             $this->output->error("Invalid Credentials");
         }
 
-        $sql    = "SELECT` * FROM playersData WHERE `emailId` = '$emailId'";
+        $sql    = "SELECT * FROM playersData WHERE `emailId` = '$emailId'";
         $result = $conn->query($sql)->fetch_assoc();
         if (!$result) {
             Log::e($this, "getPlayerFor: " . mysqli_error($this->conn));

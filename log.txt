@@ -28,3 +28,6 @@ verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
 2017-01-29 18:46:49 : 	error - CredentialsManager
 verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
 
+2017-01-29 19:25:19 : 	error - CredentialsManager
+verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
+
