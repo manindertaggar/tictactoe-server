@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'CredentialVerifier.php';
+require 'Log.php';
 require 'Output.php';
 require 'Mover.php';
 require 'Database.php';
@@ -27,6 +28,7 @@ class TicTacToeEngine
 
     public function onpacketReceived($packet)
     {
+        Log::i($this,"onpacketReceived ".$packet);
         if (!$this->isPacketValid($packet)) {
             $this->output->error("invalid packet");
             return;
