@@ -2,32 +2,34 @@
 class Log
 {
 
-    public static function e($tag, $message)
+    public static function e($obj, $message)
     {
+        $tag= get_class($obj);
     	$printableMessage ="\terror - $tag\n$message"; 
     	Log::show($printableMessage);
     }
 
 
-    public static function w($tag, $message)
+    public static function w($obj, $message)
     {
+        $tag= get_class($obj);
     	$printableMessage ="\twarning - $tag\n$message"; 
     	Log::show($printableMessage);
     
     }
 
-    public static function d($tag, $message)
+    public static function d($obj, $message)
     {
+        $tag= get_class($obj);
     	$printableMessage ="\tdebug - $tag\n$message"; 
     	Log::show($printableMessage);
-    
     }
 
-    public static function i($tag, $message)
+    public static function i($obj, $message)
     {
+        $tag= get_class($obj);
     	$printableMessage ="\tinfo - $tag\n$message"; 
-    	Log::show($printableMessage);
-    
+    	Log::show($printableMessage);    
     }
 
     private static function show($message)
