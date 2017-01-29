@@ -1,5 +1,5 @@
 <?php
-class Logger
+class Log
 {
     public static function e($obj, $message)
     {
