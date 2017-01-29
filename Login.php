@@ -28,14 +28,14 @@ $playerManager = new PlayerManager($conn);
 if ($intent === "signup") {
     $playerManager->createPlayer($postBody['data']);
 } else if ($intent === "login") {
-    
-    if (!array_key_exists('emailId', $postBody['data'])||
+
+    if (!array_key_exists('emailId', $postBody['data']) ||
         !array_key_exists('password', $postBody['data'])) {
         $output->error("invalid arguments");
     }
 
-    $emailId = $postBody['data']['emailId'];
-    $password    = $postBody['data']['password'];
+    $emailId  = $postBody['data']['emailId'];
+    $password = $postBody['data']['password'];
 
     $player = $playerManager->getPlayerFor($emailId, $password);
     $output->success(json_encode(array('player' => $player)));
@@ -52,4 +52,3 @@ if ($intent === "signup") {
     $output->success(json_encode(array('playerExists' => $playerExists)));
 
 }
-

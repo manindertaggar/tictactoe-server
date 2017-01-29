@@ -47,7 +47,7 @@ class PlayerManager
         $avatarUrl = $payload['avatarUrl'];
 
         $password = $payload['password'];
-        $password = $this->credentialsManager->getHashFor($password);
+        $passwordEncoded = $this->credentialsManager->getHashFor($password);
 
         $date = new DateTime();
 
@@ -57,7 +57,7 @@ class PlayerManager
         $playerId            = md5($date->getTimestamp() . "playerId" . rand(111111, 999999));
         $token               = md5($date->getTimestamp() . "token" . rand(111111, 999999));
 
-        $sql    = "INSERT INTO playersData (emailId,password,playerId) VALUES ('$emailId', '$password', '$playerId')";
+        $sql    = "INSERT INTO playersData (emailId,password,playerId) VALUES ('$emailId', '$passwordEncoded', '$playerId')";
         $result = $this->conn->query($sql);
 
         if (!$result) {
@@ -73,6 +73,10 @@ class PlayerManager
             Log::e($this, "createPlayer: " . mysqli_error($this->conn));
             $this->output->error("database exception");
         }
+
+        $player = $this->getPlayerFor($emailId, $password);
+        $this->output->success(json_encode(array('player' => $player)));
+
     }
 
     public function getPlayerFor($emailId, $password)
@@ -86,7 +90,6 @@ class PlayerManager
         if (!$playerId) {
             $this->output->error("Invalid Credentials");
         }
-
 
         $sql    = "SELECT  * FROM players WHERE playerId = '$playerId'";
         $result = $this->conn->query($sql);
@@ -108,9 +111,9 @@ class PlayerManager
             $this->output->error("database exception");
         }
         $data = $result->fetch_assoc();
-        if(!$data){
+        if (!$data) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
