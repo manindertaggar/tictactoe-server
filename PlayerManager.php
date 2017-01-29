@@ -16,14 +16,22 @@ class PlayerManager
 
     }
 
+    public function getPlayerFor($emailId, $token)
+    {
+        $accountExists = $this->checkIfPlayerExists($emailId);
+        if(!$accountExists){
+            $this->output->error("Account doesnot exist");
+        }
+    }
+
     public function updatePlayer($playerId, $payload)
     {
 
     }
 
-    public function checkIfPlayerExists($playerId)
+    public function checkIfPlayerExists($emailId)
     {
-        return false;
+        return true;
     }
 
 }

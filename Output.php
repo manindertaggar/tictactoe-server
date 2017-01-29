@@ -13,5 +13,3 @@ class Output
     }
 }
 
-$output = new Output();
-

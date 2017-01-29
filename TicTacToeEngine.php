@@ -2,18 +2,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require 'CredentialVerifier.php';
-require 'Log.php';
-require 'Output.php';
-require 'Mover.php';
-require 'Database.php';
-require 'GamePlanner.php';
+require_once 'CredentialsManager.php';
+require_once 'Log.php';
+require_once 'Output.php';
+require_once 'Mover.php';
+require_once 'Database.php';
+require_once 'GamePlanner.php';
 
 class TicTacToeEngine
 {
     private $output;
     private $conn;
-    private $credentialVerifier;
+    private $credentialsManager;
     private $mover;
     private $gamePlanner;
 
@@ -22,7 +22,7 @@ class TicTacToeEngine
         $this->output             = new Output();
         $this->conn               = (new Database())->getConnection();
        
-        $this->credentialVerifier = new CredentialVerifier($this->conn);
+        $this->credentialsManager = new CredentialsManager($this->conn);
         $this->mover              = new Mover($this->conn);
         $this->gamePlanner        = new GamePlanner($this->conn);
     }
@@ -108,7 +108,7 @@ class TicTacToeEngine
         $playerId = $player['playerId'];
         $token    = $player['token'];
 
-        $isValidUser = $this->credentialVerifier->verify($playerId, $token);
+        $isValidUser = $this->credentialsManager->verify($playerId, $token);
         if (!$isValidUser) {
             $this->output->error("user details donot match");
         }

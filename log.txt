@@ -10,3 +10,18 @@ onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"tok
 2017-01-29 16:20:38 : 	info - TicTacToeEngine
 onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
 
+2017-01-29 16:56:13 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-29 16:56:32 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-29 16:57:03 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-29 16:58:20 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-29 16:58:20 : 	error - CredentialsManager
+verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
+

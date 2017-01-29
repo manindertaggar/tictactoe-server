@@ -19,13 +19,15 @@ class CredentialsManager
 
     public function verify($id, $token)
     {
-        $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$emailId') or (`userId` = '$userId'))";
-        $result = $this->conn->query($sql)->fetch_assoc();
+        $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$id') or (`userId` = '$id'))";
+        $result = $this->conn->query($sql);
         if (!$result) {
             Log::e($this, "verifyCredentils: database exception".mysqli_error($this->conn));
             return false;
         }
-        $hash = $result['password'];
+        $data =$result->fetch_assoc();
+        
+        $hash = $data['password'];
 
         if (password_verify($password, $hash)) {
             return $result['playerId'];
@@ -34,10 +36,10 @@ class CredentialsManager
     }
 
 
-    // private function getHashFor($data)
-    // {
-    //     $hash = password_hash($data, CRYPT_BLOWFISH);
-    //     return $hash;
-    // }
+    private function getHashFor($data)
+    {
+        $hash = password_hash($data, CRYPT_BLOWFISH);
+        return $hash;
+    }
 
 }
