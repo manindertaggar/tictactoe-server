@@ -1,6 +1,6 @@
 <?php
 
-class CredentialVerifier
+class CredentialsManager
 {
     private $conn;
     private $output;
@@ -11,22 +11,15 @@ class CredentialVerifier
         $this->output = new Output();
     }
 
-    public function verify($playerId, $token)
+
+    /*
+	id = userId or emailId
+	returns userId if verified else false
+    */
+
+    public function verify($id, $token)
     {
-
-//        return true;
-    }
-
-    // private function getHashFor($data)
-    // {
-    //     $hash = password_hash($data, CRYPT_BLOWFISH);
-    //     return $hash;
-    // }
-
-    private function verifyCredentils($emailId, $password)
-    {
-
-        $sql    = "SELECT * FROM playersData WHERE `emailId` = '$emailId'";
+        $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$emailId') or (`userId` = '$userId'))";
         $result = $this->conn->query($sql)->fetch_assoc();
         if (!$result) {
             Log::e($this, "verifyCredentils: database exception".mysqli_error($this->conn));
@@ -38,4 +31,13 @@ class CredentialVerifier
             return $result['playerId'];
         }
         return false;
-    }}
+    }
+
+
+    // private function getHashFor($data)
+    // {
+    //     $hash = password_hash($data, CRYPT_BLOWFISH);
+    //     return $hash;
+    // }
+
+}
