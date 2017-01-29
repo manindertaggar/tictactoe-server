@@ -1,4 +1,7 @@
 <?php
+require_once 'Log.php';
+require_once 'Output.php';
+require_once 'Database.php';
 
 class CredentialsManager
 {
