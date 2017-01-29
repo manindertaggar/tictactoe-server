@@ -4,3 +4,9 @@ message
 message
 2017-01-29 15:38:46 : 	debug - tag
 message
+2017-01-29 16:18:40 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-29 16:20:38 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+

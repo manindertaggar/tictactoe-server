@@ -3,10 +3,12 @@
 class Mover
 {
     private $conn;
+    private $output;
 
     public function __construct($conn)
     {
         $this->conn = $conn;
+        $this->output = new Output();
     }
 
     public function makeMove($playerId, $payload)
@@ -21,7 +23,7 @@ class Mover
         //everything is fine, lets make move now
 
         $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
-        $result = $conn->query($sql);
+        $result = $this->conn->query($sql);
 
     }
 

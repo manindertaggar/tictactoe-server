@@ -2,9 +2,13 @@
 class PlayerManager
 {
     private $conn;
+    private $output;
+
     public function __construct($conn)
     {
-        $this->conn = $conn;
+        $this->conn   = $conn;
+        $this->output = new Output();
+
     }
 
     public function createPlayer($payload)

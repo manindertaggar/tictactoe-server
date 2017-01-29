@@ -21,6 +21,7 @@ class TicTacToeEngine
     {
         $this->output             = new Output();
         $this->conn               = (new Database())->getConnection();
+       
         $this->credentialVerifier = new CredentialVerifier($this->conn);
         $this->mover              = new Mover($this->conn);
         $this->gamePlanner        = new GamePlanner($this->conn);
@@ -28,7 +29,8 @@ class TicTacToeEngine
 
     public function onpacketReceived($packet)
     {
-        Log::i($this,"onpacketReceived ".$packet);
+        Log::i($this,"onpacketReceived ". json_encode($packet));
+        
         if (!$this->isPacketValid($packet)) {
             $this->output->error("invalid packet");
             return;
