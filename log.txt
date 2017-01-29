@@ -49,3 +49,15 @@ createPlayer: You have an error in your SQL syntax; check the manual that corres
 2017-01-29 19:39:19 : 	error - PlayerManager
 createPlayer: Unknown column 'token' in 'field list'
 
+2017-01-29 19:48:24 : 	error - CredentialsManager
+verify: database exceptionUnknown column 'userId' in 'where clause'
+
+2017-01-29 19:49:01 : 	error - CredentialsManager
+verify: database exceptionUnknown column 'userId' in 'where clause'
+
+2017-01-29 19:50:35 : 	error - CredentialsManager
+verify: database exceptionUnknown column 'userId' in 'where clause'
+
+2017-01-29 19:50:58 : 	error - CredentialsManager
+verify: database exceptionUnknown column 'userId' in 'where clause'
+

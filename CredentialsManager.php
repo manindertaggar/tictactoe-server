@@ -20,20 +20,20 @@ class CredentialsManager
 	returns userId if verified else false
     */
 
-    public function verify($id, $token)
+    public function verify($id, $password)
     {
-        $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$id') or (`userId` = '$id'))";
+        $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$id') or (`playerId` = '$id'))";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "verifyCredentils: database exception".mysqli_error($this->conn));
-            return false;
+            Log::e($this, "verify: database exception".mysqli_error($this->conn));
+            $this->output->error("database exception");
         }
         $data =$result->fetch_assoc();
         
         $hash = $data['password'];
 
         if (password_verify($password, $hash)) {
-            return $result['playerId'];
+            return $data['playerId'];
         }
         return false;
     }

@@ -57,8 +57,6 @@ class PlayerManager
         $playerId            = md5($date->getTimestamp() . "playerId" . rand(111111, 999999));
         $token               = md5($date->getTimestamp() . "token" . rand(111111, 999999));
 
-        // $DB_TABLE = 'players_data';
-
         $sql    = "INSERT INTO playersData (emailId,password,playerId) VALUES ('$emailId', '$password', '$playerId')";
         $result = $this->conn->query($sql);
 
@@ -77,28 +75,21 @@ class PlayerManager
         }
     }
 
-    public function getPlayerFor($emailId, $token)
+    public function getPlayerFor($emailId, $password)
     {
         $accountExists = $this->checkIfPlayerExists($emailId);
         if (!$accountExists) {
             $this->output->error("Account doesnot exist");
         }
 
-        $isVerified = ($this->credentialsManager->verify($emailId, $token));
-        if (!$isVerified) {
+        $playerId = ($this->credentialsManager->verify($emailId, $password));
+        if (!$playerId) {
             $this->output->error("Invalid Credentials");
         }
 
-        $sql    = "SELECT * FROM playersData WHERE `emailId` = '$emailId'";
-        $result = $conn->query($sql)->fetch_assoc();
-        if (!$result) {
-            Log::e($this, "getPlayerFor: " . mysqli_error($this->conn));
-            $this->output->show_error("database exception");
-        }
-        $playerId = $result['playerId'];
 
         $sql    = "SELECT  * FROM players WHERE playerId = '$playerId'";
-        $result = $conn->query($sql);
+        $result = $this->conn->query($sql);
         $row    = $result->fetch_assoc();
         return $row;
     }
@@ -117,7 +108,11 @@ class PlayerManager
             $this->output->error("database exception");
         }
         $data = $result->fetch_assoc();
-        return $data;
+        if(!$data){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }
