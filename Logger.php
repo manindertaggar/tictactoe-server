@@ -1,7 +1,6 @@
 <?php
-class Log
+class Logger
 {
-
     public static function e($obj, $message)
     {
         $tag= get_class($obj);
