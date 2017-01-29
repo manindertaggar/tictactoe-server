@@ -1,1 +1,6 @@
-{"playerId":"playerId","token":"token","payload":{}}","id":"2"}
+cleared at : 2017-01-29 15:38:432017-01-29 15:38:44 : 	error - tag
+message
+2017-01-29 15:38:45 : 	error - tag
+message
+2017-01-29 15:38:46 : 	debug - tag
+message
