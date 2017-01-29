@@ -31,3 +31,21 @@ verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
 2017-01-29 19:25:19 : 	error - CredentialsManager
 verifyCredentils: database exceptionUnknown column 'userId' in 'where clause'
 
+2017-01-29 19:33:34 : 	error - PlayerManager
+getPlayerFor: 
+
+2017-01-29 19:33:50 : 	error - PlayerManager
+getPlayerFor: 
+
+2017-01-29 19:37:37 : 	error - PlayerManager
+createPlayer: Unknown column 'password' in 'field list'
+
+2017-01-29 19:38:06 : 	error - PlayerManager
+createPlayer: Unknown column 'password' in 'field list'
+
+2017-01-29 19:38:40 : 	error - PlayerManager
+createPlayer: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '','-1','-1','cf102eab04f4d8b0a362fd3be2775350','e86dd32dd2fc9686e7a4fc4ab7d0b51c' at line 2
+
+2017-01-29 19:39:19 : 	error - PlayerManager
+createPlayer: Unknown column 'token' in 'field list'
+

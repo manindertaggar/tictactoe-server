@@ -59,22 +59,21 @@ class PlayerManager
 
         // $DB_TABLE = 'players_data';
 
-        $sql    = "INSERT IGNORE INTO $playersData (emailId,password,playerId) VALUES ('$emailId', '$password', '$playerId')";
-        $result = $conn->query($sql);
+        $sql    = "INSERT INTO playersData (emailId,password,playerId) VALUES ('$emailId', '$password', '$playerId')";
+        $result = $this->conn->query($sql);
 
         if (!$result) {
             Log::e($this, "createPlayer: " . mysqli_error($this->conn));
             $this->output->show_error("database exception ");
         }
 
-        $DB_TABLE = 'players';
-        $sql      = "INSERT IGNORE INTO $DB_TABLE (name,age,avatarUrl,emailId,password,numberOfGamesPlayed,rank,winPercentage,playerId,token) VALUES (
-        '$name','$age','$avatarUrl','$emailId','$password','$numberOfGamesPlayed','$rank','$winPercentage','$playerId','$token')";
+        $sql = "INSERT INTO players (name,age,avatarUrl,emailId,numberOfGamesPlayed,rank,winPercentage,playerId) VALUES (
+        '$name','$age','$avatarUrl','$emailId','$numberOfGamesPlayed','$rank','$winPercentage','$playerId')";
 
-        $result = $conn->query($sql);
+        $result = $this->conn->query($sql);
         if (!$result) {
             Log::e($this, "createPlayer: " . mysqli_error($this->conn));
-            $this->output->show_error("database exception");
+            $this->output->error("database exception");
         }
     }
 
@@ -98,10 +97,9 @@ class PlayerManager
         }
         $playerId = $result['playerId'];
 
-        $DB_TABLE = 'players';
-        $sql      = "SELECT  * FROM $DB_TABLE WHERE playerId = '$playerId'";
-        $result   = $conn->query($sql);
-        $row      = $result->fetch_assoc();
+        $sql    = "SELECT  * FROM players WHERE playerId = '$playerId'";
+        $result = $conn->query($sql);
+        $row    = $result->fetch_assoc();
         return $row;
     }
 
@@ -112,7 +110,14 @@ class PlayerManager
 
     public function checkIfPlayerExists($emailId)
     {
-        return true;
+        $sql    = "SELECT * FROM playersData WHERE `emailId` = '$emailId'";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            Log::e($this, "getPlayerFor: " . mysqli_error($this->conn));
+            $this->output->error("database exception");
+        }
+        $data = $result->fetch_assoc();
+        return $data;
     }
 
 }
