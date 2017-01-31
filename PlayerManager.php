@@ -60,8 +60,8 @@ class PlayerManager
             $this->output->show_error("database exception ");
         }
 
-        $sql = "INSERT INTO players (name,age,avatarUrl,emailId,numberOfGamesPlayed,rank,winPercentage,playerId) VALUES (
-        '$name','$age','$avatarUrl','$emailId','$numberOfGamesPlayed','$rank','$winPercentage','$playerId')";
+        $sql = "INSERT INTO players (name,age,avatarUrl,emailId,token,numberOfGamesPlayed,rank,winPercentage,playerId) VALUES (
+        '$name','$age','$avatarUrl','$emailId','$token','$numberOfGamesPlayed','$rank','$winPercentage','$playerId')";
 
         $result = $this->conn->query($sql);
         if (!$result) {
@@ -81,10 +81,8 @@ class PlayerManager
             $this->output->error("Account doesnot exist");
         }
 
-        $data = ($this->credentialsManager->verify($emailId, $password));
-        $playerId = $data['playerId'];
-        $token = $data['token'];
-       
+        $playerId = ($this->credentialsManager->verifyPassword($emailId, $password));
+
         if (!$playerId) {
             $this->output->error("Invalid Credentials");
         }

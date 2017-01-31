@@ -23,12 +23,12 @@ class CredentialsManager
 	returns userId if verified else false
     */
 
-    public function verify($id, $password)
+    public function verifyPassword($id, $password)
     {
         $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$id') or (`playerId` = '$id'))";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "verify: database exception".mysqli_error($this->conn));
+            Log::e($this, "verifyPassword: database exception".mysqli_error($this->conn));
             $this->output->error("database exception");
         }
         $data =$result->fetch_assoc();
@@ -36,11 +36,25 @@ class CredentialsManager
         $hash = $data['password'];
 
         if (password_verify($password, $hash)) {
-            return $data;
+            return $data['playerId'];
         }
         return false;
     }
 
+    public function verifyToken($id, $token)
+    {
+        $sql    = "SELECT * FROM players WHERE ((`emailId` = '$id') or (`playerId` = '$id'))";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            Log::e($this, "verifyToken: database exception".mysqli_error($this->conn));
+            $this->output->error("database exception");
+        }
+        $data =$result->fetch_assoc();
+        
+        $savedToken = $data['token'];
+
+        return $savedToken === $token;
+    }
 
     public function getHashFor($data)
     {

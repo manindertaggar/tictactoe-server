@@ -108,7 +108,7 @@ class TicTacToeEngine
         $playerId = $player['playerId'];
         $token    = $player['token'];
 
-        $isValidUser = $this->credentialsManager->verify($playerId, $token);
+        $isValidUser = $this->credentialsManager->verifyToken($playerId, $token);
         if (!$isValidUser) {
             $this->output->error("user details donot match");
         }
