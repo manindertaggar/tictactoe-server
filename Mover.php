@@ -76,7 +76,7 @@ class Mover
         }
 
         if ($data['player_id'] === $player_id) {
-            $this->output->error("$playerId doesnot have its turn");
+            $this->output->error("$playerId doesnot havse its turn");
         }
     }
 
