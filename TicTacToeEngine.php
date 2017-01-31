@@ -73,7 +73,7 @@ class TicTacToeEngine
 
     private function requestGame($playerId, $payload)
     {
-        $this->gamePlaner->requestGame($playerId);
+        $this->gamePlanner->requestGame($playerId);
     }
     private function requestGameWith($playerId, $payload)
     {

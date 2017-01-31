@@ -28,7 +28,7 @@ class GamePlanner
 
     public function requestGame($playerId)
     {
-        $queue->addPlayer($playerId);
+        $this->queue->addPlayer($playerId);
 
 
         // $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
