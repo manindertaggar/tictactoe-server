@@ -1,12 +1,15 @@
 <?php
-require_once 'Database.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require_once 'Log.php';
 
 class Algoritham
 {
     private $winningConditions;
     private $algosCount;
+    private $conn;
 
-    public function __constructor()
+    public function __constructor($conn)
     {
         $this->$winningConditions = [
             [0, 1, 2],
@@ -19,6 +22,7 @@ class Algoritham
             [2, 5, 8]];
 
         $this->algosCount = count($this->winningConditions);
+        $this->conn       = $conn;
     }
 
     public function decideFor($gameId)
@@ -61,8 +65,32 @@ class Algoritham
         }
     }
 
-    private function getPlayersFor($gameId)
+    private function getPlayersAndMovesFor($gameId)
     {
-        $players;
+        $payload = $array(
+            'players' = array(),
+            'moves' = array();
+        );
+
+
+        $sql    = "SELECT * FROM moves WHERE gameId = '$gameId'";
+        $result = $conn->query($sql);
+
+        for ($k = 0; $k < 9; $k++) {
+            $payload['moves'][] = "null";
+        }
+
+        while ($data = $result->fetch_assoc()) {
+            if ($i < 2) {
+                $payload['players'][] = $data['playerId'];
+            }
+
+            $payload['moves'][$data['move']] = $data['playerId'];
+
+            $i++;
+        }
+
+        return $payload;
     }
+
 }

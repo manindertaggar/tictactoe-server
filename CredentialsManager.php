@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'Log.php';
 require_once 'Output.php';
 require_once 'Database.php';
