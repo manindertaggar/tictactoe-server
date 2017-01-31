@@ -19,14 +19,6 @@ class PlayerManager
     public function createPlayer($payload)
     {
 
-        /*
-        private String name, age, avatarUrl, token, emailId;
-        private List<Acheivement> acheivements;
-        private int numberOfGamesPlayed;
-        private long rank;
-        private double winPercentage;
-        private String playerId;
-         */
         if (!array_key_exists('name', $payload) ||
             !array_key_exists('age', $payload) ||
             !array_key_exists('avatarUrl', $payload) ||

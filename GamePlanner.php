@@ -2,6 +2,7 @@
 require_once 'Log.php';
 require_once 'Output.php';
 require_once 'Database.php';
+require_once 'Algoritham.php';
 
 class GamePlanner
 {
@@ -12,11 +13,13 @@ class GamePlanner
     {
         $this->conn   = $conn;
         $this->output = new Output();
-
     }
 
     public function update($gameId)
     {
+        $moves = $array();
+
+        array_push(array, var)
 
     }
 
