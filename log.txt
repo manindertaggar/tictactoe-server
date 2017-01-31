@@ -19,3 +19,21 @@ onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb2168
 2017-01-31 15:09:51 : 	info - TicTacToeEngine
 onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":[]}
 
+2017-01-31 15:11:35 : 	info - TicTacToeEngine
+onpacketReceived null
+
+2017-01-31 15:11:42 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":{"move":"1","gameId":"1"}}
+
+2017-01-31 15:13:35 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":{"move":"1","gameId":"1"}}
+
+2017-01-31 15:14:07 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":{"move":"1","gameId":"1"}}
+
+2017-01-31 15:14:40 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":{"move":"1","gameId":"1"}}
+
+2017-01-31 15:15:19 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"5a6ad66749c95719cb216816a5e76344","token":"9ae920c8a369b63e37f5ba09ad86cb94"},"payload":{"move":"1","gameId":"1"}}
+
