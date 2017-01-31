@@ -16,7 +16,7 @@ class Queue
 
     public function addPlayer($playerId)
     {
-        $sql    = "INSERT IGNORE INTO queue ($playerId) VALUES ('$playerId')";
+        $sql    = "INSERT IGNORE INTO queue (playerId) VALUES ('$playerId')";
         $result = $this->conn->query($sql);
         if (!$result) {
             Log::e($this, (__FUNCTION__) . ": " . mysqli_error($this->conn));
@@ -36,6 +36,8 @@ class Queue
         } else {
             Log::i($this, (__FUNCTION__) . ": " . $playerId . " added to queue");
         }
+        $playerId = $result['playerId'];
+        return $playerId;
     }
 
 }
