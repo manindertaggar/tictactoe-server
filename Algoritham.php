@@ -89,7 +89,7 @@ class Algoritham
             $i++;
         }
 
-        \Log::i($this, json_encode($payload));
+        \Log::i($this, (__FUNCTION__).": ".json_encode($payload));
         return $payload;
     }
 

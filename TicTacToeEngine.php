@@ -29,7 +29,7 @@ class TicTacToeEngine
 
     public function onpacketReceived($packet)
     {
-        Log::i($this,"onpacketReceived ". json_encode($packet));
+        Log::i($this,(__FUNCTION__).": ". json_encode($packet));
         
         if (!$this->isPacketValid($packet)) {
             $this->output->error("invalid packet");

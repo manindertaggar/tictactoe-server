@@ -28,7 +28,7 @@ class CredentialsManager
         $sql    = "SELECT * FROM playersData WHERE ((`emailId` = '$id') or (`playerId` = '$id'))";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "verifyPassword: database exception".mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": "."database exception".mysqli_error($this->conn));
             $this->output->error("database exception");
         }
         $data =$result->fetch_assoc();
@@ -46,7 +46,7 @@ class CredentialsManager
         $sql    = "SELECT * FROM players WHERE ((`emailId` = '$id') or (`playerId` = '$id'))";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "verifyToken: database exception".mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": "."database exception".mysqli_error($this->conn));
             $this->output->error("database exception");
         }
         $data =$result->fetch_assoc();

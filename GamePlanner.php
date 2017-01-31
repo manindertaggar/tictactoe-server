@@ -20,18 +20,19 @@ class GamePlanner
 
     public function update($gameId)
     {
-        
-        
+
     }
 
     public function requestGame($playerId)
     {
+        
         $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "makeMove: " . mysqli_error($this->conn));
+            Log::e($this,(__FUNCTION__).": ". mysqli_error($this->conn));
             $this->output->error("access verification failed. Database Error");
         }
+
 
     }
 

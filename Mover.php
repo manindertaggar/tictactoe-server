@@ -31,7 +31,7 @@ class Mover
         $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "makeMove: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ".mysqli_error($this->conn));
             $this->output->error("access verification failed. Database Error");
         }
 
@@ -50,7 +50,7 @@ class Mover
         $sql    = "SELECT * FROM moves WHERE gameId ='$gameId' and move = '$move'";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "checkIfSameMoveHasBeenMade: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ".mysqli_error($this->conn));
             $this->output->error("access verification failed. Database Error");
         }
 
@@ -66,7 +66,7 @@ class Mover
         $sql    = "SELECT playerId FROM playerGame WHERE gameId ='$gameId' ORDER BY id DESC LIMIT 1";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "doesPlayerHaveHisTurn: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ".mysqli_error($this->conn));
             $this->output->error("access verification failed. Database Error");
         }
 
@@ -85,7 +85,7 @@ class Mover
         $sql    = "SELECT status FROM games WHERE gameId ='$gameId'";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "isGameInProgress: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ".mysqli_error($this->conn));
             $this->output->error("access verification failed. Database Error");
         }
 

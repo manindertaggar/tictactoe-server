@@ -56,7 +56,7 @@ class PlayerManager
         $result = $this->conn->query($sql);
 
         if (!$result) {
-            Log::e($this, "createPlayer: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ". mysqli_error($this->conn));
             $this->output->show_error("database exception ");
         }
 
@@ -65,7 +65,7 @@ class PlayerManager
 
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "createPlayer: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ". mysqli_error($this->conn));
             $this->output->error("database exception");
         }
 
@@ -104,7 +104,7 @@ class PlayerManager
         $sql    = "SELECT * FROM playersData WHERE `emailId` = '$emailId'";
         $result = $this->conn->query($sql);
         if (!$result) {
-            Log::e($this, "getPlayerFor: " . mysqli_error($this->conn));
+            Log::e($this, (__FUNCTION__).": ".mysqli_error($this->conn));
             $this->output->error("database exception");
         }
         $data = $result->fetch_assoc();
