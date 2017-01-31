@@ -67,11 +67,10 @@ class Algoritham
 
     private function getPlayersAndMovesFor($gameId)
     {
-        $payload = $array(
-            'players' = array(),
-            'moves' = array();
-        );
-
+        // $payload = array(
+        //     'players' = array(),
+        //     'moves' = array()
+        // );
 
         $sql    = "SELECT * FROM moves WHERE gameId = '$gameId'";
         $result = $conn->query($sql);
@@ -90,6 +89,7 @@ class Algoritham
             $i++;
         }
 
+        \Log::i($this, json_encode($payload));
         return $payload;
     }
 

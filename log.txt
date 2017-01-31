@@ -1,0 +1,9 @@
+2017-01-31 14:53:33 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+
+2017-01-31 14:53:49 : 	info - TicTacToeEngine
+onpacketReceived null
+
+2017-01-31 14:54:54 : 	info - TicTacToeEngine
+onpacketReceived {"type":"makeMove","player":{"playerId":"playerId","token":"token"},"payload":[]}
+

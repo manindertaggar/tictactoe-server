@@ -36,7 +36,7 @@ class CredentialsManager
         $hash = $data['password'];
 
         if (password_verify($password, $hash)) {
-            return $data['playerId'];
+            return $data;
         }
         return false;
     }

@@ -22,8 +22,6 @@ class GamePlanner
     {
         $moves = $array();
 
-        array_push(array, var)
-
     }
 
     public function requestGame($playerId)

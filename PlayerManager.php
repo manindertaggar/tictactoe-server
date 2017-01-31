@@ -41,7 +41,7 @@ class PlayerManager
         $age       = $payload['age'];
         $avatarUrl = $payload['avatarUrl'];
 
-        $password = $payload['password'];
+        $password        = $payload['password'];
         $passwordEncoded = $this->credentialsManager->getHashFor($password);
 
         $date = new DateTime();
@@ -81,7 +81,10 @@ class PlayerManager
             $this->output->error("Account doesnot exist");
         }
 
-        $playerId = ($this->credentialsManager->verify($emailId, $password));
+        $data = ($this->credentialsManager->verify($emailId, $password));
+        $playerId = $data['playerId'];
+        $token = $data['token'];
+       
         if (!$playerId) {
             $this->output->error("Invalid Credentials");
         }
@@ -89,6 +92,7 @@ class PlayerManager
         $sql    = "SELECT  * FROM players WHERE playerId = '$playerId'";
         $result = $this->conn->query($sql);
         $row    = $result->fetch_assoc();
+
         return $row;
     }
 
