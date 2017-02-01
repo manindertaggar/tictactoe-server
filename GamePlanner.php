@@ -18,7 +18,7 @@ class GamePlanner
     {
         $this->conn   = $conn;
         $this->output = new Output();
-        $this->queue = new Queue($this->conn);
+        $this->queue  = new Queue($this->conn);
     }
 
     public function update($gameId)
@@ -29,7 +29,7 @@ class GamePlanner
     public function requestGame($playerId)
     {
         $this->queue->addPlayer($playerId);
-
+        Log::i($this, (__FUNCTION__) . ": playerId:" .$this->queue->getPlayer());
 
         // $sql    = "INSERT INTO moves (move,playerId,gameId) VALUES ('$move','$playerId','$gameId')";
         // $result = $this->conn->query($sql);
@@ -37,7 +37,6 @@ class GamePlanner
         //     Log::e($this,(__FUNCTION__).": ". mysqli_error($this->conn));
         //     $this->output->error("access verification failed. Database Error");
         // }
-
 
     }
 
