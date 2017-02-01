@@ -46,9 +46,24 @@ class Queue
         if ($row1 === null || $row2 === null) {
             return null;
         }
+
         $players[] = $row1['playerId'];
         $players[] = $row2['playerId'];
+
+        $this->removeFromQueue($players[0]);
+        $this->removeFromQueue($players[1]);
+
         return $players[];
+
+    }
+
+    private function removeFromQueue($playerId)
+    {
+        $sql    = "DELETE FROM queue WHERE playerId = '$playerId'";
+        $result = $this->conn->query($sql);
+        if (!$result) {
+            Log::e($this, (__FUNCTION__) . ": " . mysqli_error($this->conn));    
+        }
 
     }
 
